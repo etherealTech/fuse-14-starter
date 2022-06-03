@@ -12,21 +12,22 @@ jobs:
           node-version: 14
       - name: Install
         run: npm install
+      - name: Release Version
+        run: |
+          node bin/release-version.js
+          git add src/version
+          git commit -m "Released version $(cat src/version)"
+          git push origin master
       - name: Build
         run: npm run build
       - name: Configure Git
         run: |
           git config --global user.name "Ethereal"
           git config --global user.email "ethereal97@gmail.com"
-      - name: Release Version
-        run: |
-          node bin/release-version.js
-          git add .
-          git commit -m "Released version $(cat src/version)"
-          git push origin master
       - name: Github Page
         run: |
           mv dist docs
+          rm -rf 
           git checkout --orphan gh-pages
           git add .
           git commit -m "Commited to Github Page"
