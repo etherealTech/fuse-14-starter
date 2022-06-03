@@ -28,6 +28,7 @@ jobs:
         run: |
           rm -rf .browserslistrc .editorconfig .gitignore .angular .github bin node_modules src package.json package-lock.json angular.json tailwind.config.js transloco.config.js tsconfig.app.json tsconfig.json
           mv dist/** .
+          cp index.html 404.html
           rm -rf dist
           git checkout --orphan gh-pages
           git add --all
